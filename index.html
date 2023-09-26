@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Saving Excel data in Mysql</title>
+    <meta charset="utf-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"> </script>
+</head>
+<body>
+<div>
+    <form action="/import-object" enctype="multipart/form-data" method="post">
+        <input
+                type="file"
+                name="import-object"
+                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+        <button type="submit" value="Store File">Object to MySQL</button>
+    </form>
+</div>
+<div>
+    <form action="/import-pollutant" enctype="multipart/form-data" method="post">
+        <input
+                type="file"
+                name="import-pollutant"
+                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+        <button type="submit" value="Store File">Pollutant to MySQL</button>
+    </form>
+</div>
+<div>
+    <form action="/import-pollution" enctype="multipart/form-data" method="post">
+        <input
+                type="file"
+                name="import-pollution"
+                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+        <button type="submit" value="Store File">Pollution to MySQL</button>
+    </form>
+</div>
+</body>
+</html>

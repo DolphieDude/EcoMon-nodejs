@@ -1,0 +1,21 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit object</title>
+    <style>.field{width:180px;}</style>
+</head>
+<body>
+<h1>Edit object</h1>
+<form action="/edit" method="POST">
+    <input type="hidden" name="idobject" value="{{object.idobject}}">
+    <label>Name</label><br>
+    <input name="name" value="{{object.name}}"  class="field"><br><br>
+    <label>Description</label><br>
+    <input name="description" value="{{object.description}}"  class="field"><br><br>
+    <input type="submit" value="Send">
+</form>
+<a href="/">To object list </a>
+</body>
+<html>
