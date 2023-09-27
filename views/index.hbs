@@ -44,5 +44,25 @@
         </tr>
     {{/each}}
 </table>
+<h1>List of pollution</h1>
+<p><a href="/add-pollution">Add pollution</a></p>
+<table>
+    <tr><th>N</th><th>Object</th><th>Pollutant</th><th>Value</th><th>Year</th><th></th></tr>
+    {{#each pollution}}
+        <tr>
+            <td>{{this.idpollution}}</td>
+            <td>{{this.idobject}}</td>
+            <td>{{this.idpollutant}}</td>
+            <td>{{this.valuepollution}}</td>
+            <td>{{this.year}}</td>
+            <td>
+                <a href="/edit-pollution/{{this.idpollution}}">Edit</a>
+                <form action="delete/{{this.idpollution}}" method="POST" style="display:inline;">
+                    <input type="submit" value="Delete" >
+                </form>
+            </td>
+        </tr>
+    {{/each}}
+</table>
 </body>
 </html>

@@ -36,10 +36,14 @@ app.get("/", function(req, res){
         if(err) return console.log(err);
         connection.query("SELECT * FROM pollutant", function(err, pollutant_data) {
             if(err) return console.log(err);
-            res.render("index.hbs", {
-                object: object_data,
-                // object - назва вашої таблиці
-                pollutant: pollutant_data
+            connection.query("SELECT * FROM pollution", function(err, pollution_data) {
+                if(err) return console.log(err);
+                res.render("index.hbs", {
+                    object: object_data,
+                    // object - назва вашої таблиці
+                    pollutant: pollutant_data,
+                    pollution: pollution_data
+                });
             });
         });
     });
@@ -75,6 +79,23 @@ app.post("/add-pollutant", urlencodedParser, function (req, res) {
     const name_pollutant = req.body.name_pollutant;
     const mass_consumption = req.body.mass_consumption;
     connection.query("INSERT INTO pollutant(name_pollutant, mass_consumption) VALUES (?,?)", [name_pollutant, mass_consumption], function(err, data) {
+        if(err) return console.log(err);
+        res.redirect("/");
+    });
+});
+
+app.get("/add-pollution", function(req, res){
+    res.render("add-pollution.hbs");
+});
+// Після заповнення форми та натискання на кнопку дані в запиті POST відправляються методом, що отримує відправлені дані і за допомогою SQL-команди INSERT відправляє їх в БД
+app.post("/add-pollution", urlencodedParser, function (req, res) {
+
+    if(!req.body) return res.sendStatus(400);
+    const idobject = req.body.idobject;
+    const idpollutant = req.body.idpollutant;
+    const valuepollution = req.body.valuepollution;
+    const year = req.body.year;
+    connection.query("INSERT INTO pollution(idobject, idpollutant, valuepollution, year) VALUES (?,?,?,?)", [idobject, idpollutant, valuepollution, year], function(err, data) {
         if(err) return console.log(err);
         res.redirect("/");
     });
@@ -133,7 +154,31 @@ app.post("/edit-pollutant", urlencodedParser, function (req, res) {
     });
 });
 
+app.get("/edit-pollution/:idpollution", function(req, res){
+    const idpollution = req.params.idpollution;
+    connection.query("SELECT * FROM pollution WHERE idpollution=?", [idpollution], function(err, data) {
+        if(err) return console.log(err);
+        res.render("edit-pollution.hbs", {
+            pollution: data[0]
+// object - назва вашої таблиці
+        });
+    });
+});
+// Після редагування та натискання на кнопку дані надсилаються у POST-запиті. Метод отримує дані та за допомогою команди UPDATE відправляє їх у БД.
+app.post("/edit-pollution", urlencodedParser, function (req, res) {
 
+    if(!req.body) return res.sendStatus(400);
+    const idobject = req.body.idobject;
+    const idpollutant = req.body.idpollutant;
+    const valuepollution = req.body.valuepollution;
+    const year = req.body.year;
+    const idpollution= req.body.idpollution;
+
+    connection.query("UPDATE pollution SET idobject=?, idpollutant=?, valuepollution=?, year=? WHERE idpollution=?", [idobject, idpollutant, valuepollution, year, idpollution], function(err, data) {
+        if(err) return console.log(err);
+        res.redirect("/");
+    });
+});
 
 
 // При натисканні на кнопку видалення у списку об'єктів спрацьовує метод, який отримує id об'єкта, що видаляється, і видаляє його з БД за допомогою команди DELETE.
