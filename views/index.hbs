@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Objects</title>
+    <title>Shevchuk</title>
 </head>
 <body>
 <h1>List of object</h1>
@@ -20,6 +20,24 @@
             <td>
                 <a href="/edit/{{this.idobject}}">Edit</a>
                 <form action="delete/{{this.idobject}}" method="POST" style="display:inline;">
+                    <input type="submit" value="Delete" >
+                </form>
+            </td>
+        </tr>
+    {{/each}}
+</table>
+<h1>List of pollutant</h1>
+<p><a href="/add-pollutant">Add pollutant</a></p>
+<table>
+    <tr><th>N</th><th>Name</th><th>Mass Consumption</th><th></th></tr>
+    {{#each pollutant}}
+        <tr>
+            <td>{{this.idpollutant}}</td>
+            <td>{{this.name_pollutant}}</td>
+            <td>{{this.mass_consumption}}</td>
+            <td>
+                <a href="/edit-pollutant/{{this.idpollutant}}">Edit</a>
+                <form action="delete/{{this.idpollutant}}" method="POST" style="display:inline;">
                     <input type="submit" value="Delete" >
                 </form>
             </td>

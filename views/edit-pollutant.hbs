@@ -1,0 +1,21 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit pollutant</title>
+    <style>.field{width:180px;}</style>
+</head>
+<body>
+<h1>Edit pollutant</h1>
+<form action="/edit-pollutant" method="POST">
+    <input type="hidden" name="idpollutant" value="{{pollutant.idpollutant}}">
+    <label>Name</label><br>
+    <input name="name_pollutant" value="{{pollutant.name_pollutant}}"  class="field"><br><br>
+    <label>Mass Consumption</label><br>
+    <input name="mass_consumption" value="{{pollutant.mass_consumption}}"  class="field"><br><br>
+    <input type="submit" value="Send">
+</form>
+<a href="/">GO BACK</a>
+</body>
+<html>
