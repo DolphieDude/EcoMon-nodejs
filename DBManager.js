@@ -1,4 +1,4 @@
-const mysql   = require('mysql');
+const mysql   = require('mysql2');
 const express = require("express");
 const app = express();
 
@@ -12,8 +12,8 @@ app.set("view engine", "hbs");
 var connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : 'qwerty12',
-    database : 'ecoMon'
+    password : '7720',
+    database : 'shevchuk'
 });
 
 
@@ -54,7 +54,8 @@ app.post("/add", urlencodedParser, function (req, res) {
     if(!req.body) return res.sendStatus(400);
     const name = req.body.name;
     const description = req.body.description;
-    connection.query("INSERT INTO object(name, description) VALUES (?,?)", [name, description], function(err, data) {
+    const ownership = req.body.ownership;
+    connection.query("INSERT INTO object(name, description, ownership) VALUES (?,?,?)", [name, description, ownership], function(err, data) {
         if(err) return console.log(err);
         res.redirect("/");
     });
@@ -80,9 +81,10 @@ app.post("/edit", urlencodedParser, function (req, res) {
     if(!req.body) return res.sendStatus(400);
     const name = req.body.name;
     const description = req.body.description;
+    const ownership = req.body.ownership;
     const idobject = req.body.idobject;
 
-    connection.query("UPDATE object SET name=?, description=? WHERE idobject=?", [name, description, idobject], function(err, data) {
+    connection.query("UPDATE object SET name=?, description=?, ownership=? WHERE idobject=?", [name, description, ownership, idobject], function(err, data) {
         if(err) return console.log(err);
         res.redirect("/");
     });

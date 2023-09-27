@@ -10,12 +10,13 @@
 <h1>List of object</h1>
 <p><a href="/add">Add object</a></p>
 <table>
-    <tr><th>N</th><th>Name</th><th>Description</th><th></th></tr>
+    <tr><th>N</th><th>Name</th><th>Description</th><th>Ownership</th><th></th></tr>
     {{#each object}}
         <tr>
             <td>{{this.idobject}}</td>
             <td>{{this.name}}</td>
             <td>{{this.description}}</td>
+            <td>{{this.ownership}}</td>
             <td>
                 <a href="/edit/{{this.idobject}}">Edit</a>
                 <form action="delete/{{this.idobject}}" method="POST" style="display:inline;">
