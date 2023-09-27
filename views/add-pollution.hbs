@@ -10,11 +10,21 @@
 <h1>Add pollution</h1>
 <form method="POST">
     <label>Object</label><br>
-    <input name="idobject" class="field"><br><br>
+    <select name="idobject">
+        {{#each object}}
+            <option value="{{this.idobject}}">{{this.name}}</option>
+        {{/each}}
+    </select><br><br>
     <label>Pollutant</label><br>
-    <input name="idpollutant" class="field"><br><br>
-    <label>Pollutant</label><br>
+    <select name="idpollutant">
+        {{#each pollutant}}
+            <option value="{{this.idpollutant}}">{{this.name_pollutant}}</option>
+        {{/each}}
+    </select><br><br>
+    <label>Value</label><br>
     <input name="valuepollution" class="field"><br><br>
+    <label>Year</label><br>
+    <input name="year" class="field"><br><br>
     <input type="submit" value="Send">
 </form>
 <a href="/">GO BACK</a>

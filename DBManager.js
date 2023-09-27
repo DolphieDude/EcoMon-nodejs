@@ -36,7 +36,9 @@ app.get("/", function(req, res){
         if(err) return console.log(err);
         connection.query("SELECT * FROM pollutant", function(err, pollutant_data) {
             if(err) return console.log(err);
-            connection.query("SELECT * FROM pollution", function(err, pollution_data) {
+            connection.query("SELECT pollution.idpollution, object.name, pollutant.name_pollutant, pollution.valuepollution," +
+                "pollution.year FROM pollution INNER JOIN object ON object.idobject = pollution.idobject " +
+                "INNER JOIN pollutant ON pollutant.idpollutant = pollution.idpollutant ORDER BY idpollution", function(err, pollution_data) {
                 if(err) return console.log(err);
                 res.render("index.hbs", {
                     object: object_data,
@@ -85,7 +87,15 @@ app.post("/add-pollutant", urlencodedParser, function (req, res) {
 });
 
 app.get("/add-pollution", function(req, res){
-    res.render("add-pollution.hbs");
+    connection.query("SELECT * FROM object", function(err, object_data) {
+        connection.query("SELECT * FROM pollutant", function(err, pollutant_data) {
+            if(err) return console.log(err);
+            res.render("add-pollution.hbs", {
+                object: object_data,
+                pollutant: pollutant_data
+            });
+        });
+    });
 });
 // Після заповнення форми та натискання на кнопку дані в запиті POST відправляються методом, що отримує відправлені дані і за допомогою SQL-команди INSERT відправляє їх в БД
 app.post("/add-pollution", urlencodedParser, function (req, res) {
@@ -157,10 +167,15 @@ app.post("/edit-pollutant", urlencodedParser, function (req, res) {
 app.get("/edit-pollution/:idpollution", function(req, res){
     const idpollution = req.params.idpollution;
     connection.query("SELECT * FROM pollution WHERE idpollution=?", [idpollution], function(err, data) {
-        if(err) return console.log(err);
-        res.render("edit-pollution.hbs", {
-            pollution: data[0]
-// object - назва вашої таблиці
+        connection.query("SELECT * FROM object", function(err, object_data) {
+            connection.query("SELECT * FROM pollutant", function(err, pollutant_data) {
+                if(err) return console.log(err);
+                res.render("edit-pollution.hbs", {
+                    pollution: data[0],
+                    object: object_data,
+                    pollutant: pollutant_data
+                });
+            });
         });
     });
 });

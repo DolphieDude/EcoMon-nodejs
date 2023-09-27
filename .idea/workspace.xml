@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="525fafd7-aaf7-4346-80af-06ffef023b95" name="Changes" comment="add table presentation, adding and editing for pollutant table">
-      <change afterPath="$PROJECT_DIR$/views/add-pollution.hbs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/edit-pollution.hbs" afterDir="false" />
+    <list default="true" id="525fafd7-aaf7-4346-80af-06ffef023b95" name="Changes" comment="add implementation for pollution table too">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DBManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/DBManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/add-pollution.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/add-pollution.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/edit-pollution.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/edit-pollution.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +61,7 @@
       <workItem from="1695762260356" duration="4906000" />
       <workItem from="1695812115980" duration="5511000" />
       <workItem from="1695831566118" duration="742000" />
-      <workItem from="1695839982283" duration="2034000" />
+      <workItem from="1695839982283" duration="12493000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit. Web page with possibility to import excel files to DB">
       <created>1695766391412</created>
@@ -84,7 +84,14 @@
       <option name="project" value="LOCAL" />
       <updated>1695816939460</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add implementation for pollution table too">
+      <created>1695842060695</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1695842060695</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -105,6 +112,7 @@
     <MESSAGE value="initial commit. Web page with possibility to import excel files to DB" />
     <MESSAGE value="fixed handlebars for my DB" />
     <MESSAGE value="add table presentation, adding and editing for pollutant table" />
-    <option name="LAST_COMMIT_MESSAGE" value="add table presentation, adding and editing for pollutant table" />
+    <MESSAGE value="add implementation for pollution table too" />
+    <option name="LAST_COMMIT_MESSAGE" value="add implementation for pollution table too" />
   </component>
 </project>
