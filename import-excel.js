@@ -20,11 +20,11 @@ var connection = mysql.createConnection({
 });
 
 connection.connect(function(err){
-    if (err){
-        return console.error("Error-connect: ", err.message);
+    if (err) {
+        return console.error(err.message);
     }
     else {
-        console.log("Connection to MyFuckingSql is Fine!");
+        console.log("Connected to MySQL");
     }
 });
 
@@ -63,7 +63,7 @@ app.post('/import-pollution', uploadFile.single('import-pollution'),
 function importFileToDb(exFile, query){
     readXlsxFile(exFile).then((rows) => {
         rows.shift();
-        connection.query('insert into ' + query + ' values ?', [rows], (error, response) => {
+        connection.query('INSERT INTO ' + query + ' VALUES ?', [rows], (error, response) => {
             console.log(error || response);
         })
     })
@@ -71,5 +71,5 @@ function importFileToDb(exFile, query){
 
 const port = 3000;
 app.listen(port, () => {
-    console.log('App listnening on port ' + port);
+    console.log('localhost port is ' + port);
 });

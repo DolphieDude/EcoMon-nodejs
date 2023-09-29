@@ -17,10 +17,10 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err){
     if (err) {
-        return console.error("Error-connect: " + err.message);
+        return console.error(err.message);
     }
     else{
-        console.log("Connection to MySQL OK!");
+        console.log("Connected to MySQL");
     }
 });
 
@@ -50,10 +50,10 @@ app.get("/", function(req, res){
 
 
 
-app.get("/add", function(req, res){
-    res.render("add.hbs");
+app.get("/add-object", function(req, res){
+    res.render("object/add-object.hbs");
 });
-app.post("/add", urlencodedParser, function (req, res) {
+app.post("/add-object", urlencodedParser, function (req, res) {
 
     if(!req.body) return res.sendStatus(400);
     const name = req.body.name;
@@ -66,7 +66,7 @@ app.post("/add", urlencodedParser, function (req, res) {
 });
 
 app.get("/add-pollutant", function(req, res){
-    res.render("add-pollutant.hbs");
+    res.render("pollutant/add-pollutant.hbs");
 });
 app.post("/add-pollutant", urlencodedParser, function (req, res) {
 
@@ -83,7 +83,7 @@ app.get("/add-pollution", function(req, res){
     connection.query("SELECT * FROM object", function(err, object_data) {
         connection.query("SELECT * FROM pollutant", function(err, pollutant_data) {
             if(err) return console.log(err);
-            res.render("add-pollution.hbs", {
+            res.render("pollution/add-pollution.hbs", {
                 object: object_data,
                 pollutant: pollutant_data
             });
@@ -106,16 +106,16 @@ app.post("/add-pollution", urlencodedParser, function (req, res) {
 
 
 
-app.get("/edit/:idobject", function(req, res){
+app.get("/edit-object/:idobject", function(req, res){
     const idobject = req.params.idobject;
     connection.query("SELECT * FROM object WHERE idobject=?", [idobject], function(err, data) {
         if(err) return console.log(err);
-        res.render("edit.hbs", {
+        res.render("object/edit-object.hbs", {
             object: data[0]
         });
     });
 });
-app.post("/edit", urlencodedParser, function (req, res) {
+app.post("/edit-object", urlencodedParser, function (req, res) {
 
     if(!req.body) return res.sendStatus(400);
     const name = req.body.name;
@@ -133,7 +133,7 @@ app.get("/edit-pollutant/:idpollutant", function(req, res){
     const idpollutant = req.params.idpollutant;
     connection.query("SELECT * FROM pollutant WHERE idpollutant=?", [idpollutant], function(err, data) {
         if(err) return console.log(err);
-        res.render("edit-pollutant.hbs", {
+        res.render("pollutant/edit-pollutant.hbs", {
             pollutant: data[0]
         });
     });
@@ -157,7 +157,7 @@ app.get("/edit-pollution/:idpollution", function(req, res){
         connection.query("SELECT * FROM object", function(err, object_data) {
             connection.query("SELECT * FROM pollutant", function(err, pollutant_data) {
                 if(err) return console.log(err);
-                res.render("edit-pollution.hbs", {
+                res.render("pollution/edit-pollution.hbs", {
                     pollution: data[0],
                     object: object_data,
                     pollutant: pollutant_data
@@ -182,10 +182,28 @@ app.post("/edit-pollution", urlencodedParser, function (req, res) {
 });
 
 
-app.post("/delete/:idobject", function(req, res){
+app.post("/delete-object/:idobject", function(req, res) {
 
     const idobject = req.params.idobject;
     connection.query("DELETE FROM object WHERE idobject=?", [idobject], function(err, data) {
+        if(err) return console.log(err);
+        res.redirect("/");
+    });
+});
+
+app.post("/delete-pollutant/:idpollutant", function(req, res) {
+
+    const idpollutant = req.params.idpollutant;
+    connection.query("DELETE FROM pollutant WHERE idpollutant=?", [idpollutant], function(err, data) {
+        if(err) return console.log(err);
+        res.redirect("/");
+    });
+});
+
+app.post("/delete-pollution/:idpollution", function(req, res) {
+
+    const idpollution = req.params.idpollution;
+    connection.query("DELETE FROM pollution WHERE idpollution=?", [idpollution], function(err, data) {
         if(err) return console.log(err);
         res.redirect("/");
     });

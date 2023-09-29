@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>List of object</h1>
-<p><a href="/add">Add object</a></p>
+<p><a href="/add-object">Add object</a></p>
 <table>
     <tr><th>N</th><th>Name</th><th>Description</th><th>Ownership</th><th></th></tr>
     {{#each object}}
@@ -18,8 +18,8 @@
             <td>{{this.description}}</td>
             <td>{{this.ownership}}</td>
             <td>
-                <a href="/edit/{{this.idobject}}">Edit</a>
-                <form action="delete/{{this.idobject}}" method="POST" style="display:inline;">
+                <a href="/edit-object/{{this.idobject}}">Edit</a>
+                <form action="delete-object/{{this.idobject}}" method="POST" style="display:inline;">
                     <input type="submit" value="Delete" >
                 </form>
             </td>
@@ -37,7 +37,7 @@
             <td>{{this.mass_consumption}}</td>
             <td>
                 <a href="/edit-pollutant/{{this.idpollutant}}">Edit</a>
-                <form action="delete/{{this.idpollutant}}" method="POST" style="display:inline;">
+                <form action="delete-pollutant/{{this.idpollutant}}" method="POST" style="display:inline;">
                     <input type="submit" value="Delete" >
                 </form>
             </td>
@@ -57,7 +57,7 @@
             <td>{{this.year}}</td>
             <td>
                 <a href="/edit-pollution/{{this.idpollution}}">Edit</a>
-                <form action="delete/{{this.idpollution}}" method="POST" style="display:inline;">
+                <form action="delete-pollution/{{this.idpollution}}" method="POST" style="display:inline;">
                     <input type="submit" value="Delete" >
                 </form>
             </td>
