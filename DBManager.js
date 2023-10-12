@@ -73,7 +73,9 @@ app.post("/add-pollutant", urlencodedParser, function (req, res) {
     if(!req.body) return res.sendStatus(400);
     const name_pollutant = req.body.name_pollutant;
     const mass_consumption = req.body.mass_consumption;
-    connection.query("INSERT INTO pollutant(name_pollutant, mass_consumption) VALUES (?,?)", [name_pollutant, mass_consumption], function(err, data) {
+    const tax = req.body.tax;
+    connection.query("INSERT INTO pollutant(name_pollutant, mass_consumption, tax) VALUES (?,?,?)",
+        [name_pollutant, mass_consumption, tax], function(err, data) {
         if(err) return console.log(err);
         res.redirect("/");
     });
@@ -143,9 +145,11 @@ app.post("/edit-pollutant", urlencodedParser, function (req, res) {
     if(!req.body) return res.sendStatus(400);
     const name_pollutant = req.body.name_pollutant;
     const mass_consumption = req.body.mass_consumption;
+    const tax = req.body.tax;
     const idpollutant = req.body.idpollutant;
 
-    connection.query("UPDATE pollutant SET name_pollutant=?, mass_consumption=? WHERE idpollutant=?", [name_pollutant, mass_consumption, idpollutant], function(err, data) {
+    connection.query("UPDATE pollutant SET name_pollutant=?, mass_consumption=?, tax=? WHERE idpollutant=?",
+        [name_pollutant, mass_consumption, tax, idpollutant], function(err, data) {
         if(err) return console.log(err);
         res.redirect("/");
     });

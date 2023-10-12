@@ -29,12 +29,13 @@
 <h1>List of pollutant</h1>
 <p><a href="/add-pollutant">Add pollutant</a></p>
 <table>
-    <tr><th>N</th><th>Name</th><th>Mass Consumption</th><th></th></tr>
+    <tr><th>N</th><th>Name</th><th>Mass Consumption</th><th>Tax</th><th></th></tr>
     {{#each pollutant}}
         <tr>
             <td>{{this.idpollutant}}</td>
             <td>{{this.name_pollutant}}</td>
             <td>{{this.mass_consumption}}</td>
+            <td>{{this.tax}}</td>
             <td>
                 <a href="/edit-pollutant/{{this.idpollutant}}">Edit</a>
                 <form action="delete-pollutant/{{this.idpollutant}}" method="POST" style="display:inline;">
