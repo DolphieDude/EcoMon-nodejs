@@ -70,11 +70,11 @@
     <input type="submit" value="Calculate Results" >
 </form>
 <table>
-    <tr><th>N</th><th>Object</th><th>Pollutant</th><th>Value (UAH)</th></tr>
+    <tr><th>N</th><th>Object</th><th></th><th>Pollutant</th><th>Value (UAH)</th></tr>
     {{#each results}}
         <tr>
             <td>{{this.idresults}}</td>
-            <td>{{this.name}}</td>
+            <td><a href="/filter-by-object/{{this.idobject}}">{{this.name}}</a></td>
             <td>{{this.name_pollutant}}</td>
             <td>{{this.valueresult}}</td>
         </tr>

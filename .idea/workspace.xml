@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="525fafd7-aaf7-4346-80af-06ffef023b95" name="Changes" comment="implemented functionality for results table filling on pressing the button">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+    <list default="true" id="525fafd7-aaf7-4346-80af-06ffef023b95" name="Changes" comment="refactored post(/calculate-results) and get(/)">
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/filter-by-object.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DBManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/DBManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +88,7 @@
       <workItem from="1696507087930" duration="238000" />
       <workItem from="1696584754351" duration="2418000" />
       <workItem from="1696884695280" duration="19000" />
-      <workItem from="1697148491886" duration="7917000" />
+      <workItem from="1697148491886" duration="11366000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit. Web page with possibility to import excel files to DB">
       <created>1695766391412</created>
@@ -153,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697159153658</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="refactored post(/calculate-results) and get(/)">
+      <created>1697192504733</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1697192504733</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +187,7 @@
     <MESSAGE value="code improvements and add deletion for all tables" />
     <MESSAGE value="implemented functionality for tax field of pollutant table" />
     <MESSAGE value="implemented functionality for results table filling on pressing the button" />
-    <option name="LAST_COMMIT_MESSAGE" value="implemented functionality for results table filling on pressing the button" />
+    <MESSAGE value="refactored post(/calculate-results) and get(/)" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactored post(/calculate-results) and get(/)" />
   </component>
 </project>

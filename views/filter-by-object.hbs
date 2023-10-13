@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>By object</title>
+</head>
+<body>
+    <table>
+        <tr><th>N</th><th>Object</th><th>Pollutant</th><th>Pollution</th><th>Value (UAH)</th></tr>
+        {{#each results}}
+            <tr>
+                <td>{{this.idresults}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.name_pollutant}}</td>
+                <td>{{this.valuepollution}}</td>
+                <td>{{this.valueresult}}</td>
+            </tr>
+        {{/each}}
+    </table>
+</body>
+</html>
