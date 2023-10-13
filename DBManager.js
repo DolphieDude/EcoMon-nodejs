@@ -32,14 +32,21 @@ app.get("/", function(req, res){
         if(err) return console.log(err);
         connection.query("SELECT * FROM pollutant", function(err, pollutant_data) {
             if(err) return console.log(err);
-            connection.query("SELECT pollution.idpollution, object.name, pollutant.name_pollutant, pollution.valuepollution," +
+            connection.query("SELECT pollution.idpollution, object.name, pollutant.name_pollutant, pollution.valuepollution, " +
                 "pollution.year FROM pollution INNER JOIN object ON object.idobject = pollution.idobject " +
                 "INNER JOIN pollutant ON pollutant.idpollutant = pollution.idpollutant ORDER BY idpollution", function(err, pollution_data) {
-                if(err) return console.log(err);
-                res.render("index.hbs", {
-                    object: object_data,
-                    pollutant: pollutant_data,
-                    pollution: pollution_data
+                connection.query("SELECT results.idresults, pollution.idobject, object.name, pollution.idpollutant, " +
+                    "pollutant.name_pollutant, results.valueresult " +
+                    "FROM results INNER JOIN pollution ON pollution.idpollution = results.idpollution " +
+                    "INNER JOIN object ON object.idobject = pollution.idobject " +
+                    "INNER JOIN pollutant ON pollutant.idpollutant = pollution.idpollutant ORDER BY idresults", function(err, results_data) {
+                    if(err) return console.log(err);
+                    res.render("index.hbs", {
+                        object: object_data,
+                        pollutant: pollutant_data,
+                        pollution: pollution_data,
+                        results: results_data
+                    });
                 });
             });
         });
@@ -212,6 +219,61 @@ app.post("/delete-pollution/:idpollution", function(req, res) {
         res.redirect("/");
     });
 });
+
+
+app.post("/calculate-results", function (req, res) {
+    connection.query("SELECT pollution.*, pollutant.tax FROM pollution INNER JOIN pollutant ON pollution.idpollutant = pollutant.idpollutant", function (err, pollution_data) {
+        if (err) {
+            console.log(err);
+            return res.status(500).send("Error calculating results.");
+        }
+
+        const resultsPromises = pollution_data.map(pollution => {
+            const valuepollution = pollution.valuepollution;
+            const tax = pollution.tax;
+
+            // Log the values
+            console.log("valuepollution:", valuepollution);
+            console.log("tax:", tax);
+
+            const valueresult = valuepollution * tax;
+
+            if (!isNaN(valueresult)) {
+                return new Promise((resolve, reject) => {
+                    connection.query(
+                        "INSERT INTO results (idpollution, valueresult) VALUES (?, ?)",
+                        [pollution.idpollution, valueresult],
+                        function (err, insertResult) {
+                            if (err) {
+                                console.log(err);
+                                reject(err);
+                            } else {
+                                resolve(insertResult);
+                            }
+                        }
+                    );
+                });
+            } else {
+                // Handle invalid values (e.g., log an error)
+                console.log("Invalid valueresult:", valueresult);
+                return Promise.resolve();
+            }
+        });
+
+        Promise.all(resultsPromises)
+            .then(() => {
+                // Redirect back to the main page after calculations and insertions
+                res.redirect("/");
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).send("Error calculating results.");
+            });
+    });
+});
+
+
+
 
 const port = 3000;
 app.listen(port, () => {
