@@ -2,23 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>By object</title>
+    <style>
+        .sum-style {
+            font-size: 24px;
+            color: #4760ff;
+            background: #FFFFE0;
+            padding: 5px 10px;
+            border: 1px solid #FF6347;
+            border-radius: 5px;
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
-    <h1>Total taxes to pay for {{object}}:{{sum}} UAH</h1>
-    <table>
-        <tr><th>N</th><th>Object</th><th>Pollutant</th><th>Pollution</th><th>Value (UAH)</th></tr>
-        {{#each results}}
-            <tr>
-                <td>{{this.idresults}}</td>
-                <td>{{this.name}}</td>
-                <td>{{this.name_pollutant}}</td>
-                <td>{{this.valuepollution}}</td>
-                <td>{{this.valueresult}}</td>
-            </tr>
-        {{/each}}
-    </table>
+<h1>Total taxes to pay for {{object}}:</h1>
+<p class="sum-style"> Sum: {{sum}} UAH</p>
+<table>
+    <tr><th>N</th><th>Object</th><th>Pollutant</th><th>Pollution</th><th>Value (UAH)</th></tr>
+    {{#each results}}
+        <tr>
+            <td>{{this.idresults}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.name_pollutant}}</td>
+            <td>{{this.valuepollution}}</td>
+            <td>{{this.valueresult}}</td>
+        </tr>
+    {{/each}}
+</table>
 </body>
 </html>

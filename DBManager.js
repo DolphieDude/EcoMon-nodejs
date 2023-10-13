@@ -245,7 +245,7 @@ app.get("/filter-by-object/:idobject", function (req, res) {
 
         let sum = 0;
         data.forEach(row => {
-            sum += row.valueresult;
+            sum += parseFloat(row.valueresult);
         });
 
         res.render("filter-by-object.hbs", {
