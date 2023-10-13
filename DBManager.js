@@ -235,16 +235,24 @@ app.get("/filter-by-object/:idobject", function (req, res) {
 
     const idobject = req.params.idobject;
     connection.query("SELECT results.idresults, pollution.idobject, object.name, pollution.idpollutant, " +
-        "pollutant.name_pollutant, pollution.valuepollution, results.valueresult FROM results " +
-        "INNER JOIN pollution ON pollution.idpollution = results.idpollution " +
+        "pollutant.name_pollutant, pollution.valuepollution, results.valueresult " +
+        "FROM results INNER JOIN pollution ON pollution.idpollution = results.idpollution " +
         "INNER JOIN object ON object.idobject = pollution.idobject " +
         "INNER JOIN pollutant ON pollutant.idpollutant = pollution.idpollutant " +
         "WHERE pollution.idobject = ? " +
         "ORDER BY idresults;", [idobject], function (err, data) {
         if (err) return console.log(err);
+
+        let sum = 0;
+        data.forEach(row => {
+            sum += row.valueresult;
+        });
+
         res.render("filter-by-object.hbs", {
+            object: data[0].name,
+            sum: sum,
             results: data
-        })
+        });
     });
 });
 
