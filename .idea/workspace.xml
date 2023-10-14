@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="525fafd7-aaf7-4346-80af-06ffef023b95" name="Changes" comment="added sum to filter-by-object">
+    <list default="true" id="525fafd7-aaf7-4346-80af-06ffef023b95" name="Changes" comment="fixed for decimals and made sum more distinct in frontend">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DBManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/DBManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/filter-by-object.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/filter-by-object.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/filter-by-object.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/filter-results.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -88,7 +88,8 @@
       <workItem from="1696584754351" duration="2418000" />
       <workItem from="1696884695280" duration="19000" />
       <workItem from="1697148491886" duration="15897000" />
-      <workItem from="1697234533711" duration="3187000" />
+      <workItem from="1697234533711" duration="4182000" />
+      <workItem from="1697274197213" duration="5085000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit. Web page with possibility to import excel files to DB">
       <created>1695766391412</created>
@@ -174,7 +175,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697216635483</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="fixed for decimals and made sum more distinct in frontend">
+      <created>1697240192906</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1697240192906</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,6 +212,7 @@
     <MESSAGE value="refactored post(/calculate-results) and get(/)" />
     <MESSAGE value="added filter-by-object.hbs" />
     <MESSAGE value="added sum to filter-by-object" />
-    <option name="LAST_COMMIT_MESSAGE" value="added sum to filter-by-object" />
+    <MESSAGE value="fixed for decimals and made sum more distinct in frontend" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed for decimals and made sum more distinct in frontend" />
   </component>
 </project>

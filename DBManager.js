@@ -7,7 +7,7 @@ const urlencodedParser = express.urlencoded({extended: false});
 app.set("view engine", "hbs");
 
 
-var connection = mysql.createConnection({
+const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '7720',
@@ -24,9 +24,14 @@ connection.connect(function (err) {
     }
 });
 
+const results_query = "SELECT results.idresults, pollution.idobject, object.name, pollution.idpollutant, " +
+    "pollutant.name_pollutant, pollution.year, pollution.valuepollution, results.valueresult FROM results " +
+    "INNER JOIN pollution ON pollution.idpollution = results.idpollution " +
+    "INNER JOIN object ON object.idobject = pollution.idobject " +
+    "INNER JOIN pollutant ON pollutant.idpollutant = pollution.idpollutant ";
 
 app.get("/", function (req, res) {
-    var query = "SELECT * FROM object; ";
+    let query = "SELECT * FROM object; ";
 
     query += "SELECT * FROM pollutant; ";
 
@@ -34,12 +39,7 @@ app.get("/", function (req, res) {
         "pollution.year FROM pollution INNER JOIN object ON object.idobject = pollution.idobject " +
         "INNER JOIN pollutant ON pollutant.idpollutant = pollution.idpollutant ORDER BY idpollution; ";
 
-    query += "SELECT results.idresults, pollution.idobject, object.name, pollution.idpollutant, " +
-        "pollutant.name_pollutant, results.valueresult FROM results " +
-        "INNER JOIN pollution ON pollution.idpollution = results.idpollution " +
-        "INNER JOIN object ON object.idobject = pollution.idobject " +
-        "INNER JOIN pollutant ON pollutant.idpollutant = pollution.idpollutant " +
-        "ORDER BY idresults; ";
+    query += results_query + "ORDER BY idresults; ";
 
     connection.query(query, function (err, data) {
         if (err) {
@@ -232,15 +232,10 @@ app.post("/calculate-results", function (req, res) {
 });
 
 app.get("/filter-by-object/:idobject", function (req, res) {
-
     const idobject = req.params.idobject;
-    connection.query("SELECT results.idresults, pollution.idobject, object.name, pollution.idpollutant, " +
-        "pollutant.name_pollutant, pollution.valuepollution, results.valueresult " +
-        "FROM results INNER JOIN pollution ON pollution.idpollution = results.idpollution " +
-        "INNER JOIN object ON object.idobject = pollution.idobject " +
-        "INNER JOIN pollutant ON pollutant.idpollutant = pollution.idpollutant " +
-        "WHERE pollution.idobject = ? " +
-        "ORDER BY idresults;", [idobject], function (err, data) {
+
+    connection.query(results_query + "WHERE pollution.idobject = ? " +
+        "ORDER BY results.idpollution;", [idobject], function (err, data) {
         if (err) return console.log(err);
 
         let sum = 0;
@@ -248,14 +243,54 @@ app.get("/filter-by-object/:idobject", function (req, res) {
             sum += parseFloat(row.valueresult);
         });
 
-        res.render("filter-by-object.hbs", {
-            object: data[0].name,
+        res.render("filter-results.hbs", {
+            filter: data[0].name,
             sum: sum,
             results: data
         });
     });
 });
 
+app.get("/filter-by-year/:year", function (req, res) {
+    const year = req.params.year;
+
+    connection.query(results_query + "WHERE pollution.year = ? " +
+        "ORDER BY results.idpollution;", [year], function (err, data) {
+        if (err) return console.log(err);
+
+        let sum = 0;
+        data.forEach(row => {
+            sum += parseFloat(row.valueresult);
+        });
+
+        res.render("filter-results.hbs", {
+            filter: data[0].year,
+            sum: sum,
+            results: data
+        });
+    });
+});
+
+app.post("/filter-by-object-and-year/:idobject/:year", function (req, res) {
+    const idobject = req.params.idobject;
+    const year = req.params.year;
+
+    connection.query(results_query + "WHERE pollution.idobject = ? AND pollution.year = ? " +
+        "ORDER BY results.idpollution", [idobject, year], function (err, data) {
+        if (err) return console.log(err);
+
+        let sum = 0;
+        data.forEach(row => {
+            sum += parseFloat(row.valueresult);
+        });
+
+        res.render("filter-results.hbs", {
+            filter: data[0].name + " in " + data[0].year,
+            sum: sum,
+            results: data
+        });
+    });
+});
 
 
 const port = 3000;

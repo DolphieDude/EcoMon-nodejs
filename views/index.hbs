@@ -5,12 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shevchuk</title>
+    <style>
+        a:link {
+            color: cadetblue;
+        }
+
+        a:visited {
+            color: cadetblue;
+        }
+    </style>
 </head>
 <body>
 <h1>List of object</h1>
 <p><a href="/add-object">Add object</a></p>
 <table>
-    <tr><th>N</th><th>Name</th><th>Description</th><th>Ownership</th><th></th></tr>
+    <tr>
+        <th>N</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Ownership</th>
+        <th></th>
+    </tr>
     {{#each object}}
         <tr>
             <td>{{this.idobject}}</td>
@@ -20,7 +35,7 @@
             <td>
                 <a href="/edit-object/{{this.idobject}}">Edit</a>
                 <form action="delete-object/{{this.idobject}}" method="POST" style="display:inline;">
-                    <input type="submit" value="Delete" >
+                    <input type="submit" value="Delete">
                 </form>
             </td>
         </tr>
@@ -29,7 +44,13 @@
 <h1>List of pollutant</h1>
 <p><a href="/add-pollutant">Add pollutant</a></p>
 <table>
-    <tr><th>N</th><th>Name</th><th>Mass Consumption</th><th>Tax</th><th></th></tr>
+    <tr>
+        <th>N</th>
+        <th>Name</th>
+        <th>Mass Consumption</th>
+        <th>Tax</th>
+        <th></th>
+    </tr>
     {{#each pollutant}}
         <tr>
             <td>{{this.idpollutant}}</td>
@@ -39,7 +60,7 @@
             <td>
                 <a href="/edit-pollutant/{{this.idpollutant}}">Edit</a>
                 <form action="delete-pollutant/{{this.idpollutant}}" method="POST" style="display:inline;">
-                    <input type="submit" value="Delete" >
+                    <input type="submit" value="Delete">
                 </form>
             </td>
         </tr>
@@ -48,7 +69,14 @@
 <h1>List of pollution</h1>
 <p><a href="/add-pollution">Add pollution</a></p>
 <table>
-    <tr><th>N</th><th>Object</th><th>Pollutant</th><th>Value</th><th>Year</th><th></th></tr>
+    <tr>
+        <th>N</th>
+        <th>Object</th>
+        <th>Pollutant</th>
+        <th>Value</th>
+        <th>Year</th>
+        <th></th>
+    </tr>
     {{#each pollution}}
         <tr>
             <td>{{this.idpollution}}</td>
@@ -59,7 +87,7 @@
             <td>
                 <a href="/edit-pollution/{{this.idpollution}}">Edit</a>
                 <form action="delete-pollution/{{this.idpollution}}" method="POST" style="display:inline;">
-                    <input type="submit" value="Delete" >
+                    <input type="submit" value="Delete">
                 </form>
             </td>
         </tr>
@@ -67,15 +95,48 @@
 </table>
 <h1>List of results</h1>
 <form action="/calculate-results" method="POST" style="display:inline;">
-    <input type="submit" value="Calculate Results" >
+    <input type="submit" value="Calculate Results">
 </form>
+<br><br><br>
+<form id="filterForm" method="POST">
+    <label>Object:</label>
+    <select name="idobject" id="objectSelect">
+        {{#each object}}
+            <option value="{{this.idobject}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+    <br>
+    <label>Year:</label>
+    <input name="year" id="yearInput" class="field">
+    <br>
+    <input type="submit" value="Filter by selected object in selected year">
+</form>
+
+<script>
+    document.getElementById("filterForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const objectValue = document.getElementById("objectSelect").value;
+        const yearValue = document.getElementById("yearInput").value;
+        this.action = `/filter-by-object-and-year/${objectValue}/${yearValue}`;
+        this.submit();
+    });
+</script>
 <table>
-    <tr><th>N</th><th>Object</th><th>Pollutant</th><th>Value (UAH)</th></tr>
+    <tr>
+        <th>N</th>
+        <th>Object</th>
+        <th>Pollutant</th>
+        <th>Year</th>
+        <th>Pollution</th>
+        <th>Value (UAH)</th>
+    </tr>
     {{#each results}}
         <tr>
             <td>{{this.idresults}}</td>
             <td><a href="/filter-by-object/{{this.idobject}}">{{this.name}}</a></td>
             <td>{{this.name_pollutant}}</td>
+            <td><a href="/filter-by-year/{{this.year}}">{{this.year}}</a></td>
+            <td>{{this.valuepollution}}</td>
             <td>{{this.valueresult}}</td>
         </tr>
     {{/each}}
