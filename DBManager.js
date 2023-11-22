@@ -36,7 +36,7 @@ app.get("/", function (req, res) {
     query += "SELECT * FROM pollutant; ";
 
     query += "SELECT pollution.idpollution, object.name, pollutant.name_pollutant, pollution.valuepollution, " +
-        "pollution.year FROM pollution INNER JOIN object ON object.idobject = pollution.idobject " +
+        "pollution.year, pollution.concentration FROM pollution INNER JOIN object ON object.idobject = pollution.idobject " +
         "INNER JOIN pollutant ON pollutant.idpollutant = pollution.idpollutant ORDER BY idpollution; ";
 
     query += results_query + "ORDER BY idresults; ";

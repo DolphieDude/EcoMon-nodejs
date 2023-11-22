@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="525fafd7-aaf7-4346-80af-06ffef023b95" name="Changes" comment="fixed for decimals and made sum more distinct in frontend">
+    <list default="true" id="525fafd7-aaf7-4346-80af-06ffef023b95" name="Changes" comment="added methods for results filtered by year and object+year">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DBManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/DBManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/filter-by-object.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/filter-results.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +87,12 @@
       <workItem from="1696884695280" duration="19000" />
       <workItem from="1697148491886" duration="15897000" />
       <workItem from="1697234533711" duration="4182000" />
-      <workItem from="1697274197213" duration="5085000" />
+      <workItem from="1697274197213" duration="5298000" />
+      <workItem from="1697287061222" duration="184000" />
+      <workItem from="1697314844787" duration="3412000" />
+      <workItem from="1697607254707" duration="780000" />
+      <workItem from="1697628951675" duration="11000" />
+      <workItem from="1700694194836" duration="1621000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit. Web page with possibility to import excel files to DB">
       <created>1695766391412</created>
@@ -182,7 +185,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697240192906</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="added methods for results filtered by year and object+year">
+      <created>1697285922127</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1697285922128</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,6 +223,7 @@
     <MESSAGE value="added filter-by-object.hbs" />
     <MESSAGE value="added sum to filter-by-object" />
     <MESSAGE value="fixed for decimals and made sum more distinct in frontend" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed for decimals and made sum more distinct in frontend" />
+    <MESSAGE value="added methods for results filtered by year and object+year" />
+    <option name="LAST_COMMIT_MESSAGE" value="added methods for results filtered by year and object+year" />
   </component>
 </project>
