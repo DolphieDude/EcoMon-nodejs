@@ -30,6 +30,12 @@ const results_query = "SELECT results.idresults, pollution.idobject, object.name
     "INNER JOIN object ON object.idobject = pollution.idobject " +
     "INNER JOIN pollutant ON pollutant.idpollutant = pollution.idpollutant ";
 
+const danger_query = "SELECT danger.iddanger, pollution.idobject, object.name, pollution.idpollutant, " +
+    "pollutant.name_pollutant, pollution.year, pollution.concentration, danger.hq, danger.cr FROM danger " +
+    "INNER JOIN pollution ON pollution.idpollution = danger.idpollution " +
+    "INNER JOIN object ON object.idobject = pollution.idobject " +
+    "INNER JOIN pollutant ON pollutant.idpollutant = pollution.idpollutant "
+
 app.get("/", function (req, res) {
     let query = "SELECT * FROM object; ";
 
@@ -41,18 +47,21 @@ app.get("/", function (req, res) {
 
     query += results_query + "ORDER BY idresults; ";
 
+    query += danger_query + "ORDER BY iddanger; ";
+
     connection.query(query, function (err, data) {
         if (err) {
             return console.log(err);
         }
 
-        const [object_data, pollutant_data, pollution_data, results_data] = data;
+        const [object_data, pollutant_data, pollution_data, results_data, danger_data] = data;
 
         res.render("index.hbs", {
             object: object_data,
             pollutant: pollutant_data,
             pollution: pollution_data,
-            results: results_data
+            results: results_data,
+            danger: danger_data
         });
     });
 });

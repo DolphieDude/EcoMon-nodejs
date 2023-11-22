@@ -104,6 +104,7 @@
         </tr>
     {{/each}}
 </table>
+
 <h1>List of results</h1>
 <form action="/calculate-results" method="POST" style="display:inline;">
     <input type="submit" value="Calculate Results">
@@ -149,6 +150,33 @@
             <td><a href="/filter-by-year/{{this.year}}">{{this.year}}</a></td>
             <td>{{this.valuepollution}}</td>
             <td>{{this.valueresult}}</td>
+        </tr>
+    {{/each}}
+</table>
+
+<h1>List of danger</h1>
+<form action="/assess-danger" method="POST" style="display:inline;">
+    <input type="submit" value="Assess Danger">
+</form>
+<table>
+    <tr>
+        <th>N</th>
+        <th>Object</th>
+        <th>Pollutant</th>
+        <th>Year</th>
+        <th>Concentration</th>
+        <th>HQ</th>
+        <th>CR</th>
+    </tr>
+    {{#each danger}}
+        <tr>
+            <td>{{this.idresults}}</td>
+            <td><a href="/filter-by-object/{{this.idobject}}">{{this.name}}</a></td>
+            <td>{{this.name_pollutant}}</td>
+            <td><a href="/filter-by-year/{{this.year}}">{{this.year}}</a></td>
+            <td>{{this.concentration}}</td>
+            <td>{{this.hq}}</td>
+            <td>{{this.cr}}</td>
         </tr>
     {{/each}}
 </table>
