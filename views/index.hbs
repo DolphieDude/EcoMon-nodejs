@@ -166,7 +166,9 @@
         <th>Year</th>
         <th>Concentration</th>
         <th>HQ</th>
+        <th>Non Carcinogen Assessment</th>
         <th>CR</th>
+        <th>Carcinogen Assessment</th>
     </tr>
     {{#each danger}}
         <tr>
@@ -176,7 +178,9 @@
             <td><a href="/filter-by-year/{{this.year}}">{{this.year}}</a></td>
             <td>{{this.concentration}}</td>
             <td>{{this.hq}}</td>
+            <td>{{this.non_carcinogen_danger}}</td>
             <td>{{this.cr}}</td>
+            <td>{{this.carcinogen_danger}}</td>
         </tr>
     {{/each}}
 </table>

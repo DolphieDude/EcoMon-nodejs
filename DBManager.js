@@ -56,12 +56,42 @@ app.get("/", function (req, res) {
 
         const [object_data, pollutant_data, pollution_data, results_data, danger_data] = data;
 
+        const dangerWithAssessments = danger_data.map(row => {
+
+            if (row.hq > 1) {
+                nonCarcinogenDanger = 'It may pose a risk, depends on HQ'
+            } else if (row.hq == 1) {
+                nonCarcinogenDanger = 'Allowed risk but cannot be considered acceptable'
+            } else {
+                nonCarcinogenDanger = 'No significant danger'
+            }
+
+            if (row.cr == null) {
+                carcinogenDanger = null;
+            } else if (row.cr > Math.pow(10, -3)) {
+                carcinogenDanger = 'High - De Manifestis. Necessary implementation measures to reduce the risk'
+            } else if (Math.pow(10, -4) < row.cr && row.cr <= Math.pow(10, -3)) {
+                carcinogenDanger = 'Average - acceptable for production conditions'
+            } else if (Math.pow(10, -6) < row.cr && row.cr <= Math.pow(10, -4)) {
+                carcinogenDanger = 'Low - acceptable risk. The level at which, as hygienic standards are established'
+            } else {
+                carcinogenDanger = 'Minimum - De Minimis. desired amount of risk'
+            }
+
+
+            return {
+                ...row,
+                non_carcinogen_danger: nonCarcinogenDanger,
+                carcinogen_danger: carcinogenDanger
+            };
+        });
+
         res.render("index.hbs", {
             object: object_data,
             pollutant: pollutant_data,
             pollution: pollution_data,
             results: results_data,
-            danger: danger_data
+            danger: dangerWithAssessments
         });
     });
 });
@@ -307,9 +337,6 @@ app.post("/assess-danger", function (req, res) {
         "pollutant.reference_concentration, pollutant.slope_factor " +
         "FROM pollution INNER JOIN pollutant ON pollution.idpollutant = pollutant.idpollutant";
 
-    console.log("SQL Query:", query);
-
-
     connection.query(query, function (err, data) {
         if (err) return console.log(err);
         let HQ, CR
@@ -335,9 +362,6 @@ app.post("/assess-danger", function (req, res) {
 
             connection.query(insertQuery, values, function (err, res) {
                 if (err) return console.log(err);
-
-                // Handle success or other operations here
-                console.log("Data inserted into 'danger' table:", res);
             });
         });
         res.redirect("/");

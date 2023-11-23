@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="525fafd7-aaf7-4346-80af-06ffef023b95" name="Changes" comment="add new table to index.hbs">
+    <list default="true" id="525fafd7-aaf7-4346-80af-06ffef023b95" name="Changes" comment="implement danger calculation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DBManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/DBManager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.hbs" afterDir="false" />
@@ -93,7 +93,7 @@
       <workItem from="1697314844787" duration="3412000" />
       <workItem from="1697607254707" duration="780000" />
       <workItem from="1697628951675" duration="11000" />
-      <workItem from="1700694194836" duration="5752000" />
+      <workItem from="1700694194836" duration="10674000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit. Web page with possibility to import excel files to DB">
       <created>1695766391412</created>
@@ -207,7 +207,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700696788858</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="implement danger calculation">
+      <created>1700700377778</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1700700377778</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -241,6 +248,7 @@
     <MESSAGE value="added methods for results filtered by year and object+year" />
     <MESSAGE value="add new fields to index.hbs" />
     <MESSAGE value="add new table to index.hbs" />
-    <option name="LAST_COMMIT_MESSAGE" value="add new table to index.hbs" />
+    <MESSAGE value="implement danger calculation" />
+    <option name="LAST_COMMIT_MESSAGE" value="implement danger calculation" />
   </component>
 </project>
