@@ -173,9 +173,9 @@
     {{#each danger}}
         <tr>
             <td>{{this.iddanger}}</td>
-            <td><a href="/filter-by-object/{{this.idobject}}">{{this.name}}</a></td>
-            <td>{{this.name_pollutant}}</td>
-            <td><a href="/filter-by-year/{{this.year}}">{{this.year}}</a></td>
+            <td><a href="/filter-danger-by-object/{{this.idobject}}">{{this.name}}</a></td>
+            <td><a href="/filter-danger-by-pollutant/{{this.idpollutant}}">{{this.name_pollutant}}</a></td>
+            <td><a href="/filter-danger-by-year/{{this.year}}">{{this.year}}</a></td>
             <td>{{this.concentration}}</td>
             <td>{{this.hq}}</td>
             <td>{{this.non_carcinogen_danger}}</td>

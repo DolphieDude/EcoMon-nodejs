@@ -56,35 +56,7 @@ app.get("/", function (req, res) {
 
         const [object_data, pollutant_data, pollution_data, results_data, danger_data] = data;
 
-        const dangerWithAssessments = danger_data.map(row => {
-
-            if (row.hq > 1) {
-                nonCarcinogenDanger = 'It may pose a risk, depends on HQ'
-            } else if (row.hq == 1) {
-                nonCarcinogenDanger = 'Allowed risk but cannot be considered acceptable'
-            } else {
-                nonCarcinogenDanger = 'No significant danger'
-            }
-
-            if (row.cr == null) {
-                carcinogenDanger = null;
-            } else if (row.cr > Math.pow(10, -3)) {
-                carcinogenDanger = 'High - De Manifestis. Necessary implementation measures to reduce the risk'
-            } else if (Math.pow(10, -4) < row.cr && row.cr <= Math.pow(10, -3)) {
-                carcinogenDanger = 'Average - acceptable for production conditions'
-            } else if (Math.pow(10, -6) < row.cr && row.cr <= Math.pow(10, -4)) {
-                carcinogenDanger = 'Low - acceptable risk. The level at which, as hygienic standards are established'
-            } else {
-                carcinogenDanger = 'Minimum - De Minimis. desired amount of risk'
-            }
-
-
-            return {
-                ...row,
-                non_carcinogen_danger: nonCarcinogenDanger,
-                carcinogen_danger: carcinogenDanger
-            };
-        });
+        const dangerWithAssessments = danger_data.map(assessDanger);
 
         res.render("index.hbs", {
             object: object_data,
@@ -95,6 +67,36 @@ app.get("/", function (req, res) {
         });
     });
 });
+
+function assessDanger(row) {
+    let nonCarcinogenDanger, carcinogenDanger;
+
+    if (row.hq > 1) {
+        nonCarcinogenDanger = 'It may pose a risk, depends on HQ';
+    } else if (row.hq === 1) {
+        nonCarcinogenDanger = 'Allowed risk but cannot be considered acceptable';
+    } else {
+        nonCarcinogenDanger = 'No significant danger';
+    }
+
+    if (row.cr === null) {
+        carcinogenDanger = null;
+    } else if (row.cr > Math.pow(10, -3)) {
+        carcinogenDanger = 'High - De Manifestis. Necessary implementation measures to reduce the risk';
+    } else if (Math.pow(10, -4) < row.cr && row.cr <= Math.pow(10, -3)) {
+        carcinogenDanger = 'Average - acceptable for production conditions';
+    } else if (Math.pow(10, -6) < row.cr && row.cr <= Math.pow(10, -4)) {
+        carcinogenDanger = 'Low - acceptable risk. The level at which, as hygienic standards are established';
+    } else {
+        carcinogenDanger = 'Minimum - De Minimis. desired amount of risk';
+    }
+
+    return {
+        ...row,
+        non_carcinogen_danger: nonCarcinogenDanger,
+        carcinogen_danger: carcinogenDanger
+    };
+}
 
 
 app.get("/add-object", function (req, res) {
@@ -366,6 +368,54 @@ app.post("/assess-danger", function (req, res) {
         });
         res.redirect("/");
     })
+});
+
+app.get("/filter-danger-by-object/:idobject", function (req, res) {
+    const idobject = req.params.idobject;
+
+    connection.query(danger_query + "WHERE pollution.idobject = ? " +
+        "ORDER BY danger.idpollution;", [idobject], function (err, data) {
+        if (err) return console.log(err);
+
+        const dangerWithAssessments = data.map(assessDanger);
+
+        res.render("filter-danger.hbs", {
+            filter: data[0].name,
+            danger: dangerWithAssessments
+        });
+    });
+});
+
+app.get("/filter-danger-by-pollutant/:idpollutant", function (req, res) {
+    const idpollutant = req.params.idpollutant;
+
+    connection.query(danger_query + "WHERE pollution.idpollutant = ? " +
+        "ORDER BY danger.idpollution;", [idpollutant], function (err, data) {
+        if (err) return console.log(err);
+
+        const dangerWithAssessments = data.map(assessDanger);
+
+        res.render("filter-danger.hbs", {
+            filter: data[0].name_pollutant,
+            danger: dangerWithAssessments
+        });
+    });
+});
+
+app.get("/filter-danger-by-year/:year", function (req, res) {
+    const year = req.params.year;
+
+    connection.query(danger_query + "WHERE pollution.year = ? " +
+        "ORDER BY danger.idpollution;", [year], function (err, data) {
+        if (err) return console.log(err);
+
+        const dangerWithAssessments = data.map(assessDanger);
+
+        res.render("filter-danger.hbs", {
+            filter: data[0].year,
+            danger: dangerWithAssessments
+        });
+    });
 });
 
 

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>By {{filter}}</title>
+    <style>
+        .sum-style {
+            font-size: 24px;
+            color: #000000;
+            background: #FFFFE0;
+            padding: 5px 10px;
+            border: 1px solid #FF6347;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        a:link {
+            color: cadetblue;
+        }
+        a:visited {
+            color: cadetblue;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <th>N</th>
+        <th>Object</th>
+        <th>Pollutant</th>
+        <th>Year</th>
+        <th>Concentration</th>
+        <th>HQ</th>
+        <th>Non Carcinogen Assessment</th>
+        <th>CR</th>
+        <th>Carcinogen Assessment</th>
+    </tr>
+    {{#each danger}}
+        <tr>
+            <td>{{this.iddanger}}</td>
+            <td><a href="/filter-danger-by-object/{{this.idobject}}">{{this.name}}</a></td>
+            <td><a href="/filter-danger-by-pollutant/{{this.idpollutant}}">{{this.name_pollutant}}</a></td>
+            <td><a href="/filter-danger-by-year/{{this.year}}">{{this.year}}</a></td>
+            <td>{{this.concentration}}</td>
+            <td>{{this.hq}}</td>
+            <td>{{this.non_carcinogen_danger}}</td>
+            <td>{{this.cr}}</td>
+            <td>{{this.carcinogen_danger}}</td>
+        </tr>
+    {{/each}}
+</table>
+<a href="/">GO BACK</a>
+</body>
+</html>
