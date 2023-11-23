@@ -301,6 +301,49 @@ app.post("/filter-by-object-and-year/:idobject/:year", function (req, res) {
     });
 });
 
+app.post("/assess-danger", function (req, res) {
+
+    const query = "SELECT pollution.idpollution, pollution.concentration, " +
+        "pollutant.reference_concentration, pollutant.slope_factor " +
+        "FROM pollution INNER JOIN pollutant ON pollution.idpollutant = pollutant.idpollutant";
+
+    console.log("SQL Query:", query);
+
+
+    connection.query(query, function (err, data) {
+        if (err) return console.log(err);
+        let HQ, CR
+        data.forEach(row => {
+            RfC = row.reference_concentration;
+            conc = row.concentration;
+
+            HQ = conc / RfC;
+
+            SF = row.slope_factor;
+
+            if (SF != null) {
+                BW = 65, EF = 350, Tout = 5.3, Tin = 18.7, AT = 70, Vout = 1.4, Vin = 0.63, ED = 30;
+                AddLadd = (((conc * Tout * Vout) + (conc * Tin * Vin)) * EF * ED) / (BW * AT * 365);
+
+                CR = AddLadd * SF;
+            } else {
+                CR = null;
+            }
+
+            const insertQuery = "INSERT INTO danger (idpollution, hq, cr) VALUES (?, ?, ?)";
+            const values = [row.idpollution, HQ, CR];
+
+            connection.query(insertQuery, values, function (err, res) {
+                if (err) return console.log(err);
+
+                // Handle success or other operations here
+                console.log("Data inserted into 'danger' table:", res);
+            });
+        });
+        res.redirect("/");
+    })
+});
+
 
 const port = 3000;
 app.listen(port, () => {
