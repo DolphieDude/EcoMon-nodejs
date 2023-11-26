@@ -363,7 +363,7 @@ app.post("/assess-danger", function (req, res) {
             const insertQuery = "INSERT INTO danger (idpollution, hq, cr) VALUES (?, ?, ?)";
             const values = [row.idpollution, HQ, CR];
 
-            connection.query(insertQuery, values, function (err, res) {
+            connection.query(insertQuery, values, function (err, result) {
                 if (err) return console.log(err);
             });
         });
@@ -418,6 +418,53 @@ app.get("/filter-danger-by-year/:year", function (req, res) {
         });
     });
 });
+
+app.post("/calculate-losses", function (req, res) {
+    const query = "SELECT pollution.idpollution, " +
+        "pollution.concentration, pollution.valuepollution, pollutant.tlv, pollutant.mass_flow " +
+        "FROM pollution INNER JOIN pollutant ON pollution.idpollutant = pollutant.idpollutant";
+
+    connection.query(query, function (err, data) {
+        if (err) return console.log(err);
+
+        data.forEach(row => {
+            let conc = row.concentration;
+            let value = row.valuepollution;
+            let tlv = row.tlv;
+            let massFlow = row.mass_flow;
+            let loss = 0;
+
+            if (value > 0 && massFlow > 0 && tlv > 0 && value > massFlow / 114.1552) {
+                let minWage = 6700;
+                let Ai = tlv > 1 ? 10 / tlv : 1 / tlv;
+                let Knas = 1.80;
+                let Kf = 1.25;
+                let Kt = Knas * Kf;
+                let Kzi = 1;
+
+                if (conc > 0 && conc > tlv) {
+                    Kzi = conc / tlv;
+                }
+
+                loss = 3.6 * Math.pow(10, -3) * (value * 0.031709 - massFlow / 3600) * 8760 * minWage * Ai * Kt * Kzi;
+            }
+
+            const updateQuery = "UPDATE pollution SET losses = ? WHERE idpollution = ?";
+            const updateValues = [loss, row.idpollution];
+
+            connection.query(updateQuery, updateValues, function (updateErr, updateRes) {
+                if (updateErr) {
+                    console.log(updateErr);
+                }
+            });
+        });
+
+        res.redirect("/");
+    });
+});
+
+
+
 
 
 const port = 3000;
