@@ -85,6 +85,7 @@
         <th>Value</th>
         <th>Year</th>
         <th>Concentration</th>
+        <th>Losses</th>
         <th></th>
     </tr>
     {{#each pollution}}
@@ -95,6 +96,7 @@
             <td>{{this.valuepollution}}</td>
             <td>{{this.year}}</td>
             <td>{{this.concentration}}</td>
+            <td>{{this.losses}}</td>
             <td>
                 <a href="/edit-pollution/{{this.idpollution}}">Edit</a>
                 <form action="delete-pollution/{{this.idpollution}}" method="POST" style="display:inline;">
