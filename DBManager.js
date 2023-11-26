@@ -486,8 +486,45 @@ app.get("/filter-pollution-by-object/:idobject", function (req, res) {
     });
 });
 
+app.get("/filter-pollution-by-pollutant/:idpollutant", function (req, res) {
+    const idpollutant = req.params.idpollutant;
 
+    connection.query(pollution_query + "WHERE pollution.idpollutant = ? " +
+        "ORDER BY pollution.idpollution;", [idpollutant], function (err, data) {
+        if (err) return console.log(err);
 
+        let sum = 0;
+        data.forEach(row => {
+            sum += parseFloat(row.losses);
+        });
+
+        res.render("pollution/filter-pollution.hbs", {
+            filter: data[0].name_pollutant,
+            sum: sum,
+            pollution: data
+        });
+    });
+});
+
+app.get("/filter-pollution-by-year/:year", function (req, res) {
+    const year = req.params.year;
+
+    connection.query(pollution_query + "WHERE pollution.year = ? " +
+        "ORDER BY pollution.idpollution;", [year], function (err, data) {
+        if (err) return console.log(err);
+
+        let sum = 0;
+        data.forEach(row => {
+            sum += parseFloat(row.losses);
+        });
+
+        res.render("pollution/filter-pollution.hbs", {
+            filter: data[0].year,
+            sum: sum,
+            pollution: data
+        });
+    });
+});
 
 
 const port = 3000;
