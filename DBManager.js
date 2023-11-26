@@ -24,6 +24,12 @@ connection.connect(function (err) {
     }
 });
 
+const pollution_query = "SELECT pollution.idpollution, pollution.idobject, object.name, " +
+    "pollution.idpollutant, pollutant.name_pollutant, pollution.valuepollution, " +
+    "pollution.year, pollution.concentration, pollution.losses FROM pollution " +
+    "INNER JOIN object ON object.idobject = pollution.idobject " +
+    "INNER JOIN pollutant ON pollutant.idpollutant = pollution.idpollutant ";
+
 const results_query = "SELECT results.idresults, pollution.idobject, object.name, pollution.idpollutant, " +
     "pollutant.name_pollutant, pollution.year, pollution.valuepollution, results.valueresult FROM results " +
     "INNER JOIN pollution ON pollution.idpollution = results.idpollution " +
@@ -41,10 +47,7 @@ app.get("/", function (req, res) {
 
     query += "SELECT * FROM pollutant; ";
 
-    query += "SELECT pollution.idpollution, object.name, pollutant.name_pollutant, pollution.valuepollution, " +
-        "pollution.year, pollution.concentration, pollution.losses FROM pollution " +
-        "INNER JOIN object ON object.idobject = pollution.idobject " +
-        "INNER JOIN pollutant ON pollutant.idpollutant = pollution.idpollutant ORDER BY idpollution; ";
+    query += pollution_query + "ORDER BY idpollution; ";
 
     query += results_query + "ORDER BY idresults; ";
 
@@ -285,7 +288,7 @@ app.get("/filter-by-object/:idobject", function (req, res) {
             sum += parseFloat(row.valueresult);
         });
 
-        res.render("filter-results.hbs", {
+        res.render("results/filter-results.hbs", {
             filter: data[0].name,
             sum: sum,
             results: data
@@ -305,7 +308,7 @@ app.get("/filter-by-year/:year", function (req, res) {
             sum += parseFloat(row.valueresult);
         });
 
-        res.render("filter-results.hbs", {
+        res.render("results/filter-results.hbs", {
             filter: data[0].year,
             sum: sum,
             results: data
@@ -326,7 +329,7 @@ app.post("/filter-by-object-and-year/:idobject/:year", function (req, res) {
             sum += parseFloat(row.valueresult);
         });
 
-        res.render("filter-results.hbs", {
+        res.render("results/filter-results.hbs", {
             filter: data[0].name + " in " + data[0].year,
             sum: sum,
             results: data
@@ -380,7 +383,7 @@ app.get("/filter-danger-by-object/:idobject", function (req, res) {
 
         const dangerWithAssessments = data.map(assessDanger);
 
-        res.render("filter-danger.hbs", {
+        res.render("danger/filter-danger.hbs", {
             filter: data[0].name,
             danger: dangerWithAssessments
         });
@@ -396,7 +399,7 @@ app.get("/filter-danger-by-pollutant/:idpollutant", function (req, res) {
 
         const dangerWithAssessments = data.map(assessDanger);
 
-        res.render("filter-danger.hbs", {
+        res.render("danger/filter-danger.hbs", {
             filter: data[0].name_pollutant,
             danger: dangerWithAssessments
         });
@@ -412,7 +415,7 @@ app.get("/filter-danger-by-year/:year", function (req, res) {
 
         const dangerWithAssessments = data.map(assessDanger);
 
-        res.render("filter-danger.hbs", {
+        res.render("danger/filter-danger.hbs", {
             filter: data[0].year,
             danger: dangerWithAssessments
         });
@@ -460,6 +463,26 @@ app.post("/calculate-losses", function (req, res) {
         });
 
         res.redirect("/");
+    });
+});
+
+app.get("/filter-pollution-by-object/:idobject", function (req, res) {
+    const idobject = req.params.idobject;
+
+    connection.query(pollution_query + "WHERE pollution.idobject = ? " +
+        "ORDER BY pollution.idpollution;", [idobject], function (err, data) {
+        if (err) return console.log(err);
+
+        let sum = 0;
+        data.forEach(row => {
+            sum += parseFloat(row.losses);
+        });
+
+        res.render("pollution/filter-pollution.hbs", {
+            filter: data[0].name,
+            sum: sum,
+            pollution: data
+        });
     });
 });
 

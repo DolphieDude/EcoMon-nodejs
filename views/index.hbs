@@ -95,10 +95,10 @@
     {{#each pollution}}
         <tr>
             <td>{{this.idpollution}}</td>
-            <td>{{this.name}}</td>
-            <td>{{this.name_pollutant}}</td>
+            <td><a href="/filter-pollution-by-object/{{this.idobject}}">{{this.name}}</a></td>
+            <td><a href="/filter-pollution-by-pollutant/{{this.idpollutant}}">{{this.name_pollutant}}</a></td>
             <td>{{this.valuepollution}}</td>
-            <td>{{this.year}}</td>
+            <td><a href="/filter-pollution-by-year/{{this.year}}">{{this.year}}</a></td>
             <td>{{this.concentration}}</td>
             <td>{{this.losses}}</td>
             <td>

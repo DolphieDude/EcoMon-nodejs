@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>By {{filter}}</title>
+    <style>
+        .sum-style {
+            font-size: 24px;
+            color: #000000;
+            background: #FFFFE0;
+            padding: 5px 10px;
+            border: 1px solid #FF6347;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        a:link {
+            color: cadetblue;
+        }
+        a:visited {
+            color: cadetblue;
+        }
+    </style>
+</head>
+<body>
+<h3>Total losses for {{filter}}:</h3>
+<p class="sum-style"> Sum: {{sum}} UAH</p>
+<table>
+    <tr>
+        <th>N</th>
+        <th>Object</th>
+        <th>Pollutant</th>
+        <th>Value</th>
+        <th>Year</th>
+        <th>Concentration</th>
+        <th>Losses</th>
+        <th></th>
+    </tr>
+    {{#each pollution}}
+        <tr>
+            <td>{{this.idpollution}}</td>
+            <td><a href="/filter-pollution-by-object/{{this.idobject}}">{{this.name}}</a></td>
+            <td><a href="/filter-pollution-by-pollutant/{{this.idpollutant}}">{{this.name_pollutant}}</a></td>
+            <td>{{this.valuepollution}}</td>
+            <td><a href="/filter-pollution-by-year/{{this.year}}">{{this.year}}</a></td>
+            <td>{{this.concentration}}</td>
+            <td>{{this.losses}}</td>
+        </tr>
+    {{/each}}
+</table>
+<a href="/">GO BACK</a>
+</body>
+</html>

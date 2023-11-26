@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="525fafd7-aaf7-4346-80af-06ffef023b95" name="Changes" comment="add losses to index.hbs">
+    <list default="true" id="525fafd7-aaf7-4346-80af-06ffef023b95" name="Changes" comment="implement losses calculations">
+      <change afterPath="$PROJECT_DIR$/views/pollution/filter-pollution.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DBManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/DBManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/filter-danger.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/danger/filter-danger.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/filter-results.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/results/filter-results.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,6 +59,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Admin\IdeaProjects\shevchuk_eco_monitoring\views\results" />
+      <recent name="C:\Users\Admin\IdeaProjects\shevchuk_eco_monitoring\views\danger" />
       <recent name="C:\Users\Admin\IdeaProjects\shevchuk_eco_monitoring\views\pollution" />
       <recent name="C:\Users\Admin\IdeaProjects\shevchuk_eco_monitoring\views\pollutant" />
       <recent name="C:\Users\Admin\IdeaProjects\shevchuk_eco_monitoring\views\object" />
@@ -98,7 +103,7 @@
       <workItem from="1700823631606" duration="34000" />
       <workItem from="1700830395877" duration="57000" />
       <workItem from="1700867525882" duration="963000" />
-      <workItem from="1700962343936" duration="2956000" />
+      <workItem from="1700962343936" duration="4871000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit. Web page with possibility to import excel files to DB">
       <created>1695766391412</created>
@@ -240,7 +245,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700962729593</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="implement losses calculations">
+      <created>1700965520879</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1700965520879</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -278,6 +290,7 @@
     <MESSAGE value="implement risk assessment" />
     <MESSAGE value="implement danger filtering" />
     <MESSAGE value="add losses to index.hbs" />
-    <option name="LAST_COMMIT_MESSAGE" value="add losses to index.hbs" />
+    <MESSAGE value="implement losses calculations" />
+    <option name="LAST_COMMIT_MESSAGE" value="implement losses calculations" />
   </component>
 </project>
