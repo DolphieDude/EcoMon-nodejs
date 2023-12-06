@@ -44,19 +44,21 @@ app.get('/', function(req, res){
 
 app.post('/import-object', uploadFile.single('import-object'),
     (req, res) => {
-        importFileToDb(process.cwd() + '/uploads/' + req.file.filename, 'object(name, description, ownership)');
+        importFileToDb(process.cwd() + '/uploads/' + req.file.filename, 'object(idobject, name, description, ownership)');
         console.log(res);
     })
 
 app.post('/import-pollutant', uploadFile.single('import-pollutant'),
     (req, res) => {
-        importFileToDb(process.cwd() + '/uploads/' + req.file.filename, 'pollutant(name_pollutant, mass_consumption)');
+        importFileToDb(process.cwd() + '/uploads/' + req.file.filename,
+            'pollutant(idpollutant, name_pollutant, mass_consumption, tax, reference_concentration, slope_factor, toxicity_class, tlv, mass_flow)');
         console.log(res);
     })
 
 app.post('/import-pollution', uploadFile.single('import-pollution'),
     (req, res) => {
-        importFileToDb(process.cwd() + '/uploads/' + req.file.filename, 'pollution(idobject, idpollutant, valuepollution, year)');
+        importFileToDb(process.cwd() + '/uploads/' + req.file.filename,
+            'pollution(idpollution, idobject, idpollutant, valuepollution, year, concentration)');
         console.log(res);
     })
 
