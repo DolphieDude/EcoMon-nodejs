@@ -127,8 +127,16 @@ app.post("/add-pollutant", urlencodedParser, function (req, res) {
     const name_pollutant = req.body.name_pollutant;
     const mass_consumption = req.body.mass_consumption;
     const tax = req.body.tax;
-    connection.query("INSERT INTO pollutant(name_pollutant, mass_consumption, tax) VALUES (?,?,?)",
-        [name_pollutant, mass_consumption, tax], function (err, data) {
+    const reference_concentration = req.body.reference_concentration;
+    const slope_factor = req.body.slope_factor;
+    const toxicity_class = req.body.toxicity_class;
+    const tlv = req.body.tlv;
+    const mass_flow = req.body.mass_flow;
+
+    connection.query("INSERT INTO pollutant(name_pollutant, mass_consumption, tax, reference_concentration, " +
+        "slope_factor, toxicity_class, tlv, mass_flow) VALUES (?,?,?,?,?,?,?,?)",
+        [name_pollutant, mass_consumption, tax, reference_concentration,
+            slope_factor, toxicity_class, tlv, mass_flow], function (err, data) {
             if (err) return console.log(err);
             res.redirect("/");
         });
@@ -197,10 +205,17 @@ app.post("/edit-pollutant", urlencodedParser, function (req, res) {
     const name_pollutant = req.body.name_pollutant;
     const mass_consumption = req.body.mass_consumption;
     const tax = req.body.tax;
+    const reference_concentration = req.body.reference_concentration;
+    const slope_factor = req.body.slope_factor;
+    const toxicity_class = req.body.toxicity_class;
+    const tlv = req.body.tlv;
+    const mass_flow = req.body.mass_flow;
     const idpollutant = req.body.idpollutant;
 
-    connection.query("UPDATE pollutant SET name_pollutant=?, mass_consumption=?, tax=? WHERE idpollutant=?",
-        [name_pollutant, mass_consumption, tax, idpollutant], function (err, data) {
+    connection.query("UPDATE pollutant SET name_pollutant=?, mass_consumption=?, tax=?, reference_concentration=?, " +
+        "slope_factor=?, toxicity_class=?, tlv=?, mass_flow=? WHERE idpollutant=?",
+        [name_pollutant, mass_consumption, tax, reference_concentration,
+            slope_factor, toxicity_class, tlv, mass_flow, idpollutant], function (err, data) {
             if (err) return console.log(err);
             res.redirect("/");
         });
