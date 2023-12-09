@@ -160,7 +160,9 @@ app.post("/add-pollution", urlencodedParser, function (req, res) {
     const idpollutant = req.body.idpollutant;
     const valuepollution = req.body.valuepollution;
     const year = req.body.year;
-    connection.query("INSERT INTO pollution(idobject, idpollutant, valuepollution, year) VALUES (?,?,?,?)", [idobject, idpollutant, valuepollution, year], function (err, data) {
+    const concentration = req.body.concentration;
+    connection.query("INSERT INTO pollution(idobject, idpollutant, valuepollution, year, concentration) VALUES (?,?,?,?,?)",
+        [idobject, idpollutant, valuepollution, year, concentration], function (err, data) {
         if (err) return console.log(err);
         res.redirect("/");
     });
@@ -243,9 +245,12 @@ app.post("/edit-pollution", urlencodedParser, function (req, res) {
     const idpollutant = req.body.idpollutant;
     const valuepollution = req.body.valuepollution;
     const year = req.body.year;
+    const concentration = req.body.concentration;
+    const losses = req.body.losses;
     const idpollution = req.body.idpollution;
 
-    connection.query("UPDATE pollution SET idobject=?, idpollutant=?, valuepollution=?, year=? WHERE idpollution=?", [idobject, idpollutant, valuepollution, year, idpollution], function (err, data) {
+    connection.query("UPDATE pollution SET idobject=?, idpollutant=?, valuepollution=?, year=?, concentration=?, losses=?" +
+        " WHERE idpollution=?", [idobject, idpollutant, valuepollution, year, concentration, losses, idpollution], function (err, data) {
         if (err) return console.log(err);
         res.redirect("/");
     });

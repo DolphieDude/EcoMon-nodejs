@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="525fafd7-aaf7-4346-80af-06ffef023b95" name="Changes" comment="updated import-excel">
+    <list default="true" id="525fafd7-aaf7-4346-80af-06ffef023b95" name="Changes" comment="updated add-pollutant and edit-pollutant">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DBManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/DBManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/pollutant/add-pollutant.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pollutant/add-pollutant.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/pollutant/edit-pollutant.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pollutant/edit-pollutant.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/pollution/add-pollution.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pollution/add-pollution.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/pollution/edit-pollution.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/pollution/edit-pollution.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +110,8 @@
       <workItem from="1701907390916" duration="82000" />
       <workItem from="1701956573607" duration="329000" />
       <workItem from="1701957030389" duration="4018000" />
-      <workItem from="1701998709148" duration="2498000" />
+      <workItem from="1701998709148" duration="2954000" />
+      <workItem from="1702058479931" duration="4389000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit. Web page with possibility to import excel files to DB">
       <created>1695766391412</created>
@@ -280,7 +281,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701907030593</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="updated add-pollutant and edit-pollutant">
+      <option name="closed" value="true" />
+      <created>1702038269071</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1702038269071</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -322,6 +331,7 @@
     <MESSAGE value="implement pollution filtering by object" />
     <MESSAGE value="implement pollution filtering by pollutant and year" />
     <MESSAGE value="updated import-excel" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated import-excel" />
+    <MESSAGE value="updated add-pollutant and edit-pollutant" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated add-pollutant and edit-pollutant" />
   </component>
 </project>
